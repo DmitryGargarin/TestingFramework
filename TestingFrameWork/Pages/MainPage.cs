@@ -24,6 +24,14 @@ namespace TestingFrameWork.Pages
             actions.Perform();
 
         }
+        public void MenuButtonClick()
+        {
+            browser.FindElement(By.ClassName("hdr-link--nav")).Click();
+        }
+        public void RulesButtonClick()
+        {
+            browser.FindElement(By.XPath("//*[@Text='Правила']")).Click();
+        }
         public void ChangeAppearanceButtonClick()
         {
             browser.FindElement(By.ClassName("hdr-link--glasses")).Click();
@@ -56,6 +64,10 @@ namespace TestingFrameWork.Pages
         public BuyTicketPage BuyTicketPageButtonClick()
         {
             return new BuyTicketPage(browser);
+        }
+        public BusinessHallPage BusinessHallPageButtonClick()
+        {
+            return new BusinessHallPage(browser);
         }
     }
 }

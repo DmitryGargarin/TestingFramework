@@ -25,10 +25,21 @@ namespace TestingFrameWork.Pages
             actions.MoveToElement(element);
             actions.Perform();
         }
+        public void MoveToSchemeButton()
+        {
+            var element = browser.FindElement(By.ClassName("bx_651765591_982"));
+            Actions actions = new Actions(browser);
+            actions.MoveToElement(element);
+            actions.Perform();
+        }
 
         public AboutPage AboutPageButtonClick()
         {
             return new AboutPage(browser);
+        }
+        public BusinessHallPage SchemePageButtonClick()
+        {
+            return new BusinessHallPage(browser);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestingFrameWork.Models;
 
 namespace TestingFrameWork.Pages
 {
@@ -29,7 +30,10 @@ namespace TestingFrameWork.Pages
             inputField.SendKeys(text);
         }
 
-
+        public void SendInfoButtonClick()
+        {
+            browser.FindElement(By.ClassName("form__btn")).Click();
+        }
 
     }
 }
