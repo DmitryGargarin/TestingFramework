@@ -29,15 +29,24 @@ namespace TestingFrameWork.Pages
         private UserModel noNumberUser = UserModel.UserWithoutNumber();
         private UserModel noCardUser = UserModel.UserWithoutCard();
 
+        private string buyTicketPageID = "bx_651765591_978";
+        private string nameID = "name_adult_1";
+        private string surnameID = "surname_adult_1";
+        private string middlenameID = "middlename_adult_1";
+        private string birthdateID = "birthdate_adult_1";
+        private string docID = "docnumber_adult_1";
+        private string phoneID = "phone";
+        private string mailID = "email";
+        private string pickPlaneButton = "//div[@class='price']";
         public BuyTicketPage(IWebDriver driver)
         {
             browser = driver;
             MoveToBuyTicketButton();
-            browser.FindElement(By.Id("bx_651765591_978")).Click();
+            browser.FindElement(By.Id(buyTicketPageID)).Click();
         }
         public void MoveToBuyTicketButton()
         {
-            var element = browser.FindElement(By.Id("bx_651765591_985"));
+            var element = browser.FindElement(By.Id(buyTicketPageID));
             Actions actions = new Actions(browser);
             actions.MoveToElement(element);
             actions.Perform();
@@ -53,39 +62,17 @@ namespace TestingFrameWork.Pages
         }
         public void PickAirplane()
         {
-            browser.FindElement(By.XPath("//div[@class='price']")).Click();
+            browser.FindElement(By.XPath(pickPlaneButton)).Click();
         }
-        public void InputDefaultUserInfo()
+        public void InputUserInfo(UserModel user)
         {
-            name = browser.FindElement(By.Id("name_adult_1")); name.SendKeys(defaultUser.name);
-            lastname = browser.FindElement(By.Id("surname_adult_1")); lastname.SendKeys(defaultUser.lastname);
-            thirdname = browser.FindElement(By.Id("middlename_adult_1")); thirdname.SendKeys(defaultUser.thirdname);
-            birthdate = browser.FindElement(By.Id("birthdate_adult_1")); birthdate.SendKeys(defaultUser.birthday);
-            documentNumber = browser.FindElement(By.Id("docnumber_adult_1")); documentNumber.SendKeys(defaultUser.birthday);
-            phone = browser.FindElement(By.Id("phone")); phone.SendKeys(defaultUser.phoneNumber);
-            mail = browser.FindElement(By.Id("email")); mail.SendKeys(defaultUser.mail);
-            browser.FindElement(By.ClassName("btn-payment")).Click();
-        }
-        public void InputNoNumberUserInfo()
-        {
-            name = browser.FindElement(By.Id("name_adult_1")); name.SendKeys(noNumberUser.name);
-            lastname = browser.FindElement(By.Id("surname_adult_1")); lastname.SendKeys(noNumberUser.lastname);
-            thirdname = browser.FindElement(By.Id("middlename_adult_1")); thirdname.SendKeys(noNumberUser.thirdname);
-            birthdate = browser.FindElement(By.Id("birthdate_adult_1")); birthdate.SendKeys(noNumberUser.birthday);
-            documentNumber = browser.FindElement(By.Id("docnumber_adult_1")); documentNumber.SendKeys(noNumberUser.birthday);
-            phone = browser.FindElement(By.Id("phone")); phone.SendKeys(noNumberUser.phoneNumber);
-            mail = browser.FindElement(By.Id("email")); mail.SendKeys(noNumberUser.mail);
-            browser.FindElement(By.ClassName("btn-payment")).Click();
-        }
-        public void InputNoCardUserInfo()
-        {
-            name = browser.FindElement(By.Id("name_adult_1")); name.SendKeys(noCardUser.name);
-            lastname = browser.FindElement(By.Id("surname_adult_1")); lastname.SendKeys(noCardUser.lastname);
-            thirdname = browser.FindElement(By.Id("middlename_adult_1")); thirdname.SendKeys(noCardUser.thirdname);
-            birthdate = browser.FindElement(By.Id("birthdate_adult_1")); birthdate.SendKeys(noCardUser.birthday);
-            documentNumber = browser.FindElement(By.Id("docnumber_adult_1")); documentNumber.SendKeys(noCardUser.birthday);
-            phone = browser.FindElement(By.Id("phone")); phone.SendKeys(noCardUser.phoneNumber);
-            mail = browser.FindElement(By.Id("email")); mail.SendKeys(noCardUser.mail);
+            name = browser.FindElement(By.Id(nameID)); name.SendKeys(user.name);
+            lastname = browser.FindElement(By.Id(surnameID)); lastname.SendKeys(user.lastname);
+            thirdname = browser.FindElement(By.Id(middlenameID)); thirdname.SendKeys(user.thirdname);
+            birthdate = browser.FindElement(By.Id(birthdateID)); birthdate.SendKeys(user.birthday);
+            documentNumber = browser.FindElement(By.Id(docID)); documentNumber.SendKeys(user.birthday);
+            phone = browser.FindElement(By.Id(phoneID)); phone.SendKeys(user.phoneNumber);
+            mail = browser.FindElement(By.Id(mailID)); mail.SendKeys(user.mail);
             browser.FindElement(By.ClassName("btn-payment")).Click();
         }
     }

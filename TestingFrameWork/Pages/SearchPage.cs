@@ -12,15 +12,19 @@ namespace TestingFrameWork.Pages
     {
         private IWebDriver browser;
         private IWebElement inputField;
+        private string searchPage = "hdr-link--search";
+        private string inputFieldID = "q";
+        private string searchButton = "search-btn";
+        private string firstAnswerXPath = "//a[@class='search-result']";
         public SearchPage(IWebDriver driver)
         {
             browser = driver;
-            browser.FindElement(By.ClassName("hdr-link--search")).Click();
-            inputField = browser.FindElement(By.Name("q"));
+            browser.FindElement(By.ClassName(searchPage)).Click();
+            inputField = browser.FindElement(By.Name(inputFieldID));
         }
         public void MoveToSearchButton()
         {
-            var element = browser.FindElement(By.ClassName("search-btn"));
+            var element = browser.FindElement(By.ClassName(searchButton));
             Actions actions = new Actions(browser);
             actions.MoveToElement(element);
             actions.Perform();
@@ -31,11 +35,11 @@ namespace TestingFrameWork.Pages
         }
         public void GetFirstAnswerAndGoToUrl()
         {
-            browser.FindElement(By.XPath("//a[@class='search-result']")).Click();
+            browser.FindElement(By.XPath(firstAnswerXPath)).Click();
         }
         public void SearchButtonClick()
         {
-            browser.FindElement(By.ClassName("search-btn")).Click();
+            browser.FindElement(By.ClassName(searchButton)).Click();
 
         }
     }

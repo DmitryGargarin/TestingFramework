@@ -11,11 +11,12 @@ namespace TestingFrameWork.Pages
     class PartnersPage
     {
         private IWebDriver browser;
-
+        private string schemePageID = "bx_651765591_982";
+        private string partnersPage = "hdr-link--b";
         public PartnersPage(IWebDriver driver)
         {
             browser = driver;
-            browser.FindElement(By.ClassName("hdr-link--b")).Click();
+            browser.FindElement(By.ClassName(partnersPage)).Click();
         }
 
         public void MoveToAboutPageButton()
@@ -27,7 +28,7 @@ namespace TestingFrameWork.Pages
         }
         public void MoveToSchemeButton()
         {
-            var element = browser.FindElement(By.ClassName("bx_651765591_982"));
+            var element = browser.FindElement(By.ClassName(schemePageID));
             Actions actions = new Actions(browser);
             actions.MoveToElement(element);
             actions.Perform();

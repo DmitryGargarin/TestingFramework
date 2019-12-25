@@ -11,12 +11,13 @@ namespace TestingFrameWork.Pages
     class AboutPage
     {
         private IWebDriver browser;
+        private string aboutPageID = "bx_651765591_3505";
 
         public AboutPage(IWebDriver driver)
         {
             browser = driver;
             MoveToAboutPageButton();
-            browser.FindElement(By.Id("bx_651765591_3505")).Click();
+            browser.FindElement(By.Id(aboutPageID)).Click();
         }
         public void MoveToAboutPageButton()
         {

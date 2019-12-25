@@ -12,10 +12,10 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace TestingFrameWork.Driver
 {
-    class Driver
+    class DriverSingleton
     {
         private static IWebDriver driver;
-        private Driver() { }
+        private DriverSingleton() { }
         public static IWebDriver SetDriver()
         {
             if (driver == null)
@@ -38,6 +38,11 @@ namespace TestingFrameWork.Driver
             return driver;
         }
 
+        public static void PrepareDriverToWork(IWebDriver browser)
+        {
+            browser.Navigate().GoToUrl("http://gsv.aero");
+            browser.FindElement(By.ClassName("js-cookies-message__close")).Click();
+        }
         public static void CloseBrowser()
         {
             driver.Quit();

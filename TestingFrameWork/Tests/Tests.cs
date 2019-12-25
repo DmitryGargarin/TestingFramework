@@ -3,9 +3,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using TestingFrameWork.Driver;
 using TestingFrameWork.Models;
 using TestingFrameWork.Pages;
 using TestingFrameWork.Utilits;
+using TestingFrameWork.Loggers;
 
 namespace TestingFrameWork
 {
@@ -17,11 +19,11 @@ namespace TestingFrameWork
         [SetUp]
         public void OpenBrowserAndGoToWebSite()
         {
-            browser = Driver.Driver.SetDriver();
-            browser.Navigate().GoToUrl("http://gsv.aero");
-            browser.FindElement(By.ClassName("js-cookies-message__close")).Click();
+            Logger.InitLogger();
+            browser = DriverSingleton.SetDriver();
+            DriverSingleton.PrepareDriverToWork(browser);
+            Logger.Log.Info("Driver is ready");
         }
-
         [Test]
         public void BuyTicketDefaultUser()
         {
@@ -31,39 +33,9 @@ namespace TestingFrameWork
                     BuyTicketPage buyTicketPage = mainPage.BuyTicketPageButtonClick();
                     buyTicketPage.InputFlightInfo();
                     buyTicketPage.PickAirplane();
-                    buyTicketPage.InputDefaultUserInfo();
+                    buyTicketPage.InputUserInfo(user);
                     Assert.IsTrue(browser.FindElement(By.ClassName("stayhere")).Displayed);
                 }
-           );
-
-        }
-        [Test]
-        public void BuyTicketNoNumberUser()
-        {
-            Listener.MakeScreenshotWhenFail(() =>
-            {
-                MainPage mainPage = new MainPage(browser);
-                BuyTicketPage buyTicketPage = mainPage.BuyTicketPageButtonClick();
-                buyTicketPage.InputFlightInfo();
-                buyTicketPage.PickAirplane();
-                buyTicketPage.InputNoNumberUserInfo();
-                Assert.IsTrue(browser.FindElement(By.ClassName("stayhere")).Displayed);
-            }
-           );
-
-        }
-        [Test]
-        public void BuyTicketNoCardUser()
-        {
-            Listener.MakeScreenshotWhenFail(() =>
-            {
-                MainPage mainPage = new MainPage(browser);
-                BuyTicketPage buyTicketPage = mainPage.BuyTicketPageButtonClick();
-                buyTicketPage.InputFlightInfo();
-                buyTicketPage.PickAirplane();
-                buyTicketPage.InputNoCardUserInfo();
-                Assert.IsTrue(browser.FindElement(By.ClassName("stayhere")).Displayed);
-            }
            );
 
         }
@@ -73,7 +45,7 @@ namespace TestingFrameWork
             Listener.MakeScreenshotWhenFail(() =>
             {
                 browser.FindElement(By.ClassName("hdr-link--lang")).Click();
-                Assert.IsTrue(browser.FindElement(By.TagName("html")).GetAttribute("lang") == "en");
+                Assert.AreEqual("en", browser.FindElement(By.TagName("html")).GetAttribute("lang"));
             });
            
         }
@@ -82,11 +54,12 @@ namespace TestingFrameWork
         {
             Listener.MakeScreenshotWhenFail(() =>
             {
+                Logger.Log.Info("TakeAirportInfo() test started");
                 MainPage mainPage = new MainPage(browser);
                 PartnersPage partnersPage = mainPage.PartnersPageButtonClick();
                 partnersPage.MoveToAboutPageButton();
                 AboutPage aboutPage = partnersPage.AboutPageButtonClick();
-                Assert.IsTrue(browser.Url == "https://gsv.aero/partners/about/airport-today/");
+                Assert.AreEqual("https://gsv.aero/partners/about/airport-today/", browser.Url);
             });
         }
         [Test]
@@ -118,7 +91,7 @@ namespace TestingFrameWork
                 new WebDriverWait(browser, TimeSpan.FromSeconds(5));
                 searchPage.SearchButtonClick();
                 searchPage.GetFirstAnswerAndGoToUrl();
-                Assert.IsTrue(browser.Url == "https://gsv.aero/services/booking-tickets/");
+                Assert.AreEqual("https://gsv.aero/services/booking-tickets/", browser.Url);
             }
             );
         }
@@ -131,7 +104,7 @@ namespace TestingFrameWork
                 ArrivalPage arrivalPage = mainPage.ArrivalPageButtonClick();
                 HotelPage hotelPage = arrivalPage.HotelPageButtonClick();
                 hotelPage.ChooseHotel();
-                Assert.IsTrue(browser.Url == "http://www.hotelslovakia.ru/bronirovanie/");
+                Assert.AreEqual("http://www.hotelslovakia.ru/bronirovanie/", browser.Url);
             }
            );
             
@@ -179,13 +152,13 @@ namespace TestingFrameWork
         {
             MainPage mainPage = new MainPage(browser);
             BusinessHallPage businessHallPage = mainPage.BusinessHallPageButtonClick();
-            Assert.IsTrue(browser.Url == "https://gsv.aero/services/businesshall/");
+            Assert.AreEqual("https://gsv.aero/services/businesshall/", browser.Url);
         }
 
         [TearDown]
         public void CloseBrowser()
         {
-            browser.Quit();
+            DriverSingleton.CloseBrowser();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TestingFrameWork.Services
 {
     class TestDataReader
     {
-        static System.Configuration.Configuration ConfigFile
+        static Configuration ConfigFile
         {
             get
             {
