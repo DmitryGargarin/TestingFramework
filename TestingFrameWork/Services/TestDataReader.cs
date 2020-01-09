@@ -25,10 +25,5 @@ namespace TestingFrameWork.Services
                 return ConfigurationManager.OpenMappedExeConfiguration(configeMap, ConfigurationUserLevel.None);
             }
         }
-
-        public static string GetData(string key)
-        {
-            return ConfigFile.AppSettings.Settings[key]?.Value;
-        }
     }
 }

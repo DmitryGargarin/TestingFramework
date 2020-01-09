@@ -21,7 +21,7 @@ namespace TestingFrameWork.Pages
         }
         public void MoveToHotelButton()
         {
-            var element = browser.FindElement(By.Id(hotelPageId));
+            var element = browser.FindElement(By.XPath(hotelXPath));
             Actions actions = new Actions(browser);
             actions.MoveToElement(element);
             actions.Perform();

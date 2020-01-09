@@ -93,31 +93,21 @@ namespace TestingFrameWork
         [Test]
         public void ServeHotel()
         {
-            Listener.MakeScreenshotWhenFail(() =>
-            {
                 MainPage mainPage = new MainPage(browser);
                 ArrivalPage arrivalPage = mainPage.ArrivalPageButtonClick();
                 HotelPage hotelPage = arrivalPage.HotelPageButtonClick();
                 hotelPage.MoveToHotelButton();
                 hotelPage.ChooseHotel();
-                Assert.AreEqual("http://www.hotelslovakia.ru/bronirovanie/", browser.Url);
-            }
-           );
-            
+                Assert.AreEqual("https://gsv.aero/services/hotels/", browser.Url);
         }
         [Test]
         public void ChangeAppearanceOfWebSite()
         {
-            Listener.MakeScreenshotWhenFail(() =>
-            {
-                MainPage mainPage = new MainPage(browser);
-                mainPage.MoveToChangeAppearanceButton();
-                mainPage.ChangeAppearanceButtonClick();
-                mainPage.ChangeFontSize();
-                mainPage.ChangeThemeColor();
-                Assert.IsTrue(browser.FindElement(By.TagName("html")).GetAttribute("class").Contains("theme-font-lg theme-color-blind"));
-            }
-          );
+            MainPage mainPage = new MainPage(browser);
+            mainPage.ChangeAppearanceButtonClick();
+            mainPage.ChangeFontSize();
+            mainPage.ChangeThemeColor();
+            Assert.IsTrue(browser.FindElement(By.TagName("html")).GetAttribute("class").Contains("theme-font-lg theme-color-blind"));
         }
         [Test]
         public void FindSchemeOfAirport()

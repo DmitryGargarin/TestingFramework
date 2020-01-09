@@ -18,9 +18,22 @@ namespace TestingFrameWork.Driver
         private DriverSingleton() { }
         public static IWebDriver SetDriver()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMinutes(1);
-            driver.Manage().Window.Maximize();
+            if (driver == null)
+            {
+                switch (TestContext.Parameters.Get("browser"))
+                {
+                    case "firefox":
+                        new DriverManager().SetUpDriver(new FirefoxConfig());
+                        driver = new FirefoxDriver();
+                        break;
+
+                    default:
+                        new DriverManager().SetUpDriver(new ChromeConfig());
+                        driver = new ChromeDriver();
+                        break;
+                }
+                driver.Manage().Window.Maximize();
+            }
             return driver;
         }
 
