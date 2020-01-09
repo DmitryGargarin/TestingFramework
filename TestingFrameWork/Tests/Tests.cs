@@ -81,9 +81,6 @@ namespace TestingFrameWork
         [Test]
         public void BuyTicketPageThroughSearchWindow()
         {
-           
-            Listener.MakeScreenshotWhenFail(() =>
-            {
                 MainPage mainPage = new MainPage(browser);
                 SearchPage searchPage = mainPage.SearchButtonClick();
                 searchPage.InsertTextInSearchField("Купить билеты");
@@ -92,8 +89,6 @@ namespace TestingFrameWork
                 searchPage.SearchButtonClick();
                 searchPage.GetFirstAnswerAndGoToUrl();
                 Assert.AreEqual("https://gsv.aero/services/booking-tickets/", browser.Url);
-            }
-            );
         }
         [Test]
         public void ServeHotel()
@@ -125,16 +120,11 @@ namespace TestingFrameWork
           );
         }
         [Test]
-        public void FindSchemeOfAirportFromPartners()
+        public void FindSchemeOfAirport()
         {
-            Listener.MakeScreenshotWhenFail(() =>
-            {
-                MainPage mainPage = new MainPage(browser);
-                PartnersPage partnersPage = mainPage.PartnersPageButtonClick();
-                partnersPage.MoveToAboutPageButton();
-                BusinessHallPage schemePage = partnersPage.SchemePageButtonClick();
-                Assert.IsTrue(browser.Url == "https://gsv.aero/scheme/"); }
-          );
+            MainPage mainPage = new MainPage(browser);
+            SchemePage schemePage = mainPage.SchemePageButtonClick();
+            Assert.IsTrue(browser.Url == "https://gsv.aero/scheme/");
         }
         [Test]
         public void FindRulesFromMenu()
@@ -143,7 +133,6 @@ namespace TestingFrameWork
             {
                 MainPage mainPage = new MainPage(browser);
                 mainPage.MenuButtonClick();
-                mainPage.MoveToRulesMenuButton();
                 mainPage.RulesButtonClick();
                 Assert.IsTrue(browser.Url == "https://gsv.aero/rules/tamozhennyy-kontrol-/");
             }

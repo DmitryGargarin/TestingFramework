@@ -80,6 +80,7 @@
     <Compile Include="Pages\HotelPage.cs" />
     <Compile Include="Pages\PartnersPage.cs" />
     <Compile Include="Pages\BusinessHallPage.cs" />
+    <Compile Include="Pages\SchemePage.cs" />
     <Compile Include="Pages\VipPage.cs" />
     <Compile Include="Services\TestDataReader.cs" />
     <Compile Include="Tests\Tests.cs" />

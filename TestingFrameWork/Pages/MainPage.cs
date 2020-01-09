@@ -32,17 +32,9 @@ namespace TestingFrameWork.Pages
         {
             browser.FindElement(By.ClassName(menuButton)).Click();
         }
-        public void MoveToRulesMenuButton()
-        {
-            var element = browser.FindElement(By.XPath(rulesXPath));
-            Actions actions = new Actions(browser);
-            actions.MoveToElement(element);
-            actions.Perform();
-
-        }
         public void RulesButtonClick()
         {
-            browser.FindElement(By.XPath(rulesXPath)).Click();
+            browser.FindElement(By.XPath(rulesXPath)).FindElement(By.TagName("a")).Click();
         }
         public void ChangeAppearanceButtonClick()
         {
@@ -68,6 +60,10 @@ namespace TestingFrameWork.Pages
         public PartnersPage PartnersPageButtonClick()
         {
             return new PartnersPage(browser);
+        }
+        public SchemePage SchemePageButtonClick()
+        {
+            return new SchemePage(browser);
         }
         public ArrivalPage ArrivalPageButtonClick()
         {

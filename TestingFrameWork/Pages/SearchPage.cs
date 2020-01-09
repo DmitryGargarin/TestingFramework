@@ -13,14 +13,14 @@ namespace TestingFrameWork.Pages
         private IWebDriver browser;
         private IWebElement inputField;
         private string searchPage = "hdr-link--search";
-        private string inputFieldID = "q";
+        private string inputFieldClass = "search-input";
         private string searchButton = "search-btn";
         private string firstAnswerXPath = "//a[@class='search-result']";
         public SearchPage(IWebDriver driver)
         {
             browser = driver;
             browser.FindElement(By.ClassName(searchPage)).Click();
-            inputField = browser.FindElement(By.Name(inputFieldID));
+            inputField = browser.FindElement(By.ClassName(inputFieldClass));
         }
         public void MoveToSearchButton()
         {
