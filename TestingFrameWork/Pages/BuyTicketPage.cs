@@ -57,7 +57,7 @@ namespace TestingFrameWork.Pages
             departureCity = browser.FindElement(By.Id("departure"));
             departureCity.SendKeys(flight.departureCity);
             destinationCity = browser.FindElement(By.Id("arrival"));
-            destinationCity.SendKeys(flight.departureCity);
+            destinationCity.SendKeys(flight.destinationCity);
             browser.FindElement(By.ClassName("btn-search")).Click();
         }
         public void PickAirplane()

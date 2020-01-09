@@ -103,6 +103,7 @@ namespace TestingFrameWork
                 MainPage mainPage = new MainPage(browser);
                 ArrivalPage arrivalPage = mainPage.ArrivalPageButtonClick();
                 HotelPage hotelPage = arrivalPage.HotelPageButtonClick();
+                hotelPage.MoveToHotelButton();
                 hotelPage.ChooseHotel();
                 Assert.AreEqual("http://www.hotelslovakia.ru/bronirovanie/", browser.Url);
             }
@@ -142,6 +143,7 @@ namespace TestingFrameWork
             {
                 MainPage mainPage = new MainPage(browser);
                 mainPage.MenuButtonClick();
+                mainPage.MoveToRulesMenuButton();
                 mainPage.RulesButtonClick();
                 Assert.IsTrue(browser.Url == "https://gsv.aero/rules/tamozhennyy-kontrol-/");
             }

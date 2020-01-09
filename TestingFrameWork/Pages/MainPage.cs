@@ -13,7 +13,7 @@ namespace TestingFrameWork.Pages
         private IWebDriver browser;
         private string changeAppearanceButton = "hdr-link--glasses";
         private string menuButton = "hdr-link--nav";
-        private string rulesXPath = "//*[@Text='Правила']";
+        private string rulesXPath = "//html/body/div[2]/div[2]/nav/div[1]/div[1]/div/div[1]/div[11]";
         private string changeFontSizeXPath = "//*[@data-control='theme-font-lg']";
         private string changeThemeColorXPath = "//*[@data-control='theme-color-blind']";
         public MainPage(IWebDriver driver)
@@ -31,6 +31,14 @@ namespace TestingFrameWork.Pages
         public void MenuButtonClick()
         {
             browser.FindElement(By.ClassName(menuButton)).Click();
+        }
+        public void MoveToRulesMenuButton()
+        {
+            var element = browser.FindElement(By.XPath(rulesXPath));
+            Actions actions = new Actions(browser);
+            actions.MoveToElement(element);
+            actions.Perform();
+
         }
         public void RulesButtonClick()
         {

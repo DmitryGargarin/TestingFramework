@@ -18,30 +18,16 @@ namespace TestingFrameWork.Driver
         private DriverSingleton() { }
         public static IWebDriver SetDriver()
         {
-            if (driver == null)
-            {
-                switch (TestContext.Parameters.Get("browser"))
-                {
-                    case "Chrome":
-                        new DriverManager().SetUpDriver(new ChromeConfig());
-                        driver = new ChromeDriver();
-                        break;
-
-                    default:
-                        new DriverManager().SetUpDriver(new FirefoxConfig());
-                        driver = new FirefoxDriver();
-                        break;
-                }
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMinutes(1);
-                driver.Manage().Window.Maximize();
-            }
+            driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMinutes(1);
+            driver.Manage().Window.Maximize();
             return driver;
         }
 
-        public static void PrepareDriverToWork(IWebDriver browser)
+        public static void PrepareDriverToWork(IWebDriver driver)
         {
-            browser.Navigate().GoToUrl("http://gsv.aero");
-            browser.FindElement(By.ClassName("js-cookies-message__close")).Click();
+            driver.Navigate().GoToUrl("http://gsv.aero");
+            driver.FindElement(By.ClassName("js-cookies-message__close")).Click();
         }
         public static void CloseBrowser()
         {
